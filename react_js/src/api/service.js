@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const host = 'https://my-books-server.onrender.com'
-// const host = 'https://mybooks-server.up.railway.app'
+const host = 'https://destiny-library-server.onrender.com'
+// const host = 'https://my-books-server.onrender.com'
 // const host = 'http://localhost:8080'
 
 export function getAllBooks() {
