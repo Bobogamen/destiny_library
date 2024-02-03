@@ -68,7 +68,7 @@ function Author() {
     const { t } = useTranslation();
 
     if (loading) {
-        return <Loading/>
+        return <Loading />
     }
 
     return (
@@ -101,7 +101,7 @@ function Author() {
                         </tr>
                     </thead>
                     <tbody className="h6 border-1">
-                        {
+                        {author.books.length > 0 ?
                             author.books.map(b => (
                                 <tr key={b.id}>
                                     <td><a href={`/book/${b.id}`}>{b.title}</a></td>
@@ -112,6 +112,10 @@ function Author() {
                                     </td>
                                 </tr>
                             ))
+                            :
+                            <div className="my-3">
+                                <p className="text-bg-danger d-block width-fit-content px-1 rounded-1 m-auto">{t('The list is empty')}</p>
+                            </div>
                         }
                     </tbody>
                 </table>

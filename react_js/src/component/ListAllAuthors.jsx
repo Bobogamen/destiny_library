@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {getAllAuthors} from "../api/service";
+import React, { useEffect, useState } from 'react';
+import { getAllAuthors } from "../api/service";
 import { useTranslation } from 'react-i18next';
 import Loading from './Loading';
 
@@ -11,7 +11,7 @@ function ListAllAuthors() {
         getAllAuthors().then(response => {
             setAuthors(response.data)
         }).then(res => res.json)
-        .catch(res => res.json)
+            .catch(res => res.json)
 
         setLoading(false)
     }, [])
@@ -19,7 +19,7 @@ function ListAllAuthors() {
     const { t } = useTranslation();
 
     if (loading) {
-        return <Loading/>
+        return <Loading />
     }
 
     return (
@@ -30,27 +30,32 @@ function ListAllAuthors() {
                     <button className="btn btn-warning fw-bold">{t('Add')}</button>
                 </a>
             </div>
-            <div className="d-flex col-11 m-auto">
-                <table className="table table-sm table-bordered text-center align-middle">
-                    <thead className="h6 table-success">
-                    <tr>
-                        <th>{t('Title')}</th>
-                        <th>{t('Books')}</th>
-                    </tr>
-                    </thead>
-                    <tbody className="h6 table-secondary">
-                    {
-                        authors.map(a =>
-                            <tr key={a.id}>
-                                <td>
-                                    <a href={`/author/${a.id}`}>{a.name}</a>
-                                </td>
-                                <td>{a.books.length}</td>
+            <div className="d-flex col-11 m-auto justify-content-center">
+                {authors.length > 0 ?
+                    <table className="table table-sm table-bordered text-center align-middle">
+                        <thead className="h6 table-success">
+                            <tr>
+                                <th>{t('Title')}</th>
+                                <th>{t('Books')}</th>
                             </tr>
-                        )
-                    }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody className="h6 table-secondary">
+                            {
+                                authors.map(a =>
+                                    <tr key={a.id}>
+                                        <td>
+                                            <a href={`/author/${a.id}`}>{a.name}</a>
+                                        </td>
+                                        <td>{a.books.length}</td>
+                                    </tr>
+                                )
+                            }
+                        </tbody>
+                    </table>
+                    : <div>
+                        <p className="text-bg-danger d-block width-fit-content px-1 rounded-1 m-auto">{t('The list is empty')}</p>
+                    </div>
+                }
             </div>
         </div>
     );
