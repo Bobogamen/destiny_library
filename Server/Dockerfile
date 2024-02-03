@@ -1,5 +1,5 @@
 FROM eclipse-temurin:20-jdk AS build
-COPY Server /app
+COPY /Server /app
 WORKDIR /app
 RUN chmod +x gradlew
 RUN ./gradlew bootJar
