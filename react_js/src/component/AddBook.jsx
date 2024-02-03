@@ -72,7 +72,7 @@ function AddBook() {
 
     return (
         <div className="container my-2">
-            <div className="card col-md-6 offset-md-3 offset-md-3">
+            <div className="card col-md-6 offset-md-3 bg-dark-subtle">
                 <div className="card-body">
                     {authors.length > 0 ?
                         <form>

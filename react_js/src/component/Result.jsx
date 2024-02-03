@@ -33,13 +33,13 @@ function Result() {
                     </div>
                     < div className="container">
                         <table className="table table-sm table-bordered text-center align-middle">
-                            <thead className="h6">
+                            <thead className="h6 table-primary">
                                 <tr>
                                     <th>{t('Title')}</th>
                                     <th>{t('Author')}</th>
                                 </tr>
                             </thead>
-                            <tbody className="h6">
+                            <tbody className="h6 table-warning">
                                 {books.map(b =>
                                     <tr key={b.id}>
                                         <td>

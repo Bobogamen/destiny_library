@@ -1,5 +1,5 @@
 FROM eclipse-temurin:20-jdk AS build
-COPY . /app
+COPY my-books-spring-boot /app
 WORKDIR /app
 RUN chmod +x gradlew
 RUN ./gradlew bootJar

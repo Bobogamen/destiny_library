@@ -25,20 +25,20 @@ function ListAllAuthors() {
     return (
         <div>
             <div className="d-flex justify-content-center my-2">
-                <h2 className="text-center fw-bold mx-2 m-auto">{t('Authors')} {authors.length}{t('pcs')}.</h2>
+                <h2 className="text-center fw-bold mx-2 m-auto fst-italic text-bg-danger rounded-2 px-2 py-1">{t('Authors')} {authors.length}{t('pcs')}.</h2>
                 <a href="/add-author">
                     <button className="btn btn-warning fw-bold">{t('Add')}</button>
                 </a>
             </div>
             <div className="d-flex col-11 m-auto">
                 <table className="table table-sm table-bordered text-center align-middle">
-                    <thead className="h6">
+                    <thead className="h6 table-success">
                     <tr>
-                        <th>{t('Tittle')}</th>
+                        <th>{t('Title')}</th>
                         <th>{t('Books')}</th>
                     </tr>
                     </thead>
-                    <tbody className="h6">
+                    <tbody className="h6 table-secondary">
                     {
                         authors.map(a =>
                             <tr key={a.id}>

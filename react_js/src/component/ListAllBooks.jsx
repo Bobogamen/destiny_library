@@ -48,13 +48,13 @@ function ListAllBooks() {
     const { t } = useTranslation()
 
     if (loading) {
-        return <Loading/>
+        return <Loading />
     }
 
     return (
         <div>
             <div className="d-flex justify-content-center my-2">
-                <h2 className="text-center fw-bold mx-2 m-auto">{t('Books')} {books.length}{t('pcs')}.</h2>
+                <h2 className="text-center fw-bold mx-2 m-auto fst-italic text-bg-dark rounded-2 px-2 py-1">{t('Books')} {books.length}{t('pcs')}.</h2>
                 <a href="/add-book">
                     <button className="btn btn-success fw-bold">{t('Add')}</button>
                 </a>
@@ -62,34 +62,34 @@ function ListAllBooks() {
             <div className="container">
                 {sortedBooks.length > 0 ?
                     <table className="table table-sm table-bordered text-center align-middle">
-                        <thead className="h6">
+                        <thead className="h6 table-primary">
                             <tr>
                                 <th>
                                     <div className="h4 p-0 m-0">
                                         <span className="mx-1 fw-bold">{t('Title')}</span>
-                                        { sortByTitle ?
-                                            <BsSortAlphaDown className="border border-black rounded h3" onClick={handleSortByTitle}/>
+                                        {sortByTitle ?
+                                            <BsSortAlphaDown className="border border-black rounded h3" onClick={handleSortByTitle} />
                                             :
-                                            <BsSortAlphaDownAlt className="border border-black rounded h3" onClick={handleSortByTitle}/>
+                                            <BsSortAlphaDownAlt className="border border-black rounded h3" onClick={handleSortByTitle} />
                                         }
                                     </div>
                                 </th>
                                 <th>
                                     <div className="h4 p-0 m-0">
                                         <span className="mx-1 fw-bold">{t('Author')}</span>
-                                        { sortByAuthor ?
-                                            <BsSortAlphaDown className="border border-black rounded h3" onClick={handleSortByAuthor}/>
+                                        {sortByAuthor ?
+                                            <BsSortAlphaDown className="border border-black rounded h3" onClick={handleSortByAuthor} />
                                             :
-                                            <BsSortAlphaDownAlt className="border border-black rounded h3" onClick={handleSortByAuthor}/>
+                                            <BsSortAlphaDownAlt className="border border-black rounded h3" onClick={handleSortByAuthor} />
                                         }
                                     </div>
                                 </th>
                             </tr>
                         </thead>
-                        <tbody className="h6">
+                        <tbody className="h6 table-warning">
                             {sortedBooks.map(b => (
                                 <tr key={b.id}>
-                                    <td>
+                                    <td className='App'>
                                         <a href={`/book/${b.id}`}>{b.title}</a>
                                     </td>
                                     <td>

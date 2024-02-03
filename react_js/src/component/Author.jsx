@@ -74,7 +74,7 @@ function Author() {
     return (
         <div>
             <div className="container">
-                <div className="card my-2 p-2">
+                <div className="card my-2 p-2 bg-danger-subtle">
                     <form className="mb-3">
                         <small className={`bg-danger px-1 rounded text-white ${isNameValid ? 'hidden' : ''}`}>
                             {t('Name')} {t('must be at least 3 symbols')}

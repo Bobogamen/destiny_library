@@ -100,7 +100,7 @@ function Book() {
     return (
         <div>
             <div className="container">
-                <div className="card m-auto mt-2 mb-5 p-2">
+                <div className="card m-auto mt-2 mb-5 p-2 bg-dark-subtle">
                     <form className="card-body">
                         <small className={`bg-danger px-1 rounded text-white ${isNameValid ? 'hidden' : ''}`}>
                             {t('Tittle')} {t('must be at least 3 symbols')}
