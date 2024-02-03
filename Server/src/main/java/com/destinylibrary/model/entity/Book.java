@@ -1,4 +1,4 @@
-package com.mybooks.model.entity;
+package com.destinylibrary.model.entity;
 
 import jakarta.persistence.*;
 

@@ -1,10 +1,11 @@
-package com.mybooks.service;
+package com.destinylibrary.service;
 
-import com.mybooks.model.entity.Author;
-import com.mybooks.model.dto.AuthorDTO;
-import com.mybooks.repository.AuthorRepository;
-import com.mybooks.repository.BookRepository;
 import org.springframework.stereotype.Service;
+
+import com.destinylibrary.model.dto.AuthorDTO;
+import com.destinylibrary.model.entity.Author;
+import com.destinylibrary.repository.AuthorRepository;
+import com.destinylibrary.repository.BookRepository;
 
 import java.util.Comparator;
 import java.util.List;

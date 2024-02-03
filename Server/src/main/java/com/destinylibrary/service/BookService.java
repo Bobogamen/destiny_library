@@ -1,12 +1,13 @@
-package com.mybooks.service;
+package com.destinylibrary.service;
 
+import com.destinylibrary.model.entity.Author;
+import com.destinylibrary.model.entity.Book;
+import com.destinylibrary.repository.AuthorRepository;
+import com.destinylibrary.repository.BookRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mybooks.model.entity.Author;
-import com.mybooks.model.entity.Book;
-import com.mybooks.repository.AuthorRepository;
-import com.mybooks.repository.BookRepository;
+
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;

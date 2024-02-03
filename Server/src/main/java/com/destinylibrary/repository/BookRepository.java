@@ -1,9 +1,10 @@
-package com.mybooks.repository;
+package com.destinylibrary.repository;
 
-import com.mybooks.model.entity.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import com.destinylibrary.model.entity.Book;
 
 import java.util.List;
 

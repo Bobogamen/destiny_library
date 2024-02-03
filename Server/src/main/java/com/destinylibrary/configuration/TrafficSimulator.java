@@ -1,4 +1,4 @@
-package com.mybooks.configuration;
+package com.destinylibrary.configuration;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ public class TrafficSimulator {
 
     @Scheduled(cron = "0 */13 * * * *")
     public void sendGetRequest() {
-        String URL = "https://my-books-server.onrender.com/books";
+        String URL = "https://destiny-library-server.onrender.com/books";
 
         restTemplate.getForObject(URL, String.class);
 

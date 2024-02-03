@@ -1,9 +1,9 @@
-package com.mybooks.model.dto;
-
-import com.mybooks.model.entity.Book;
+package com.destinylibrary.model.dto;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.destinylibrary.model.entity.Book;
 
 public class AuthorDTO {
 

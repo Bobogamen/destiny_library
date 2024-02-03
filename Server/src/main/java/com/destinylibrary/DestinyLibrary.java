@@ -1,4 +1,4 @@
-package com.mybooks;
+package com.destinylibrary;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 
 @SpringBootApplication
 @EnableScheduling
-public class MyBooksApplication {
+public class DestinyLibrary {
 
 	@Bean
 	public RestTemplate restTemplate() {
@@ -19,7 +19,7 @@ public class MyBooksApplication {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(MyBooksApplication.class, args);
-		System.out.println("My Books is successfully at " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm:ss")));
+		SpringApplication.run(DestinyLibrary.class, args);
+		System.out.println("Destiny Library is successfully started at " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm:ss")));
 	}
 }

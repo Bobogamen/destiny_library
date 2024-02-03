@@ -1,10 +1,11 @@
-package com.mybooks.controller;
+package com.destinylibrary.controller;
 
+import com.destinylibrary.model.dto.AuthorDTO;
+import com.destinylibrary.model.entity.Book;
+import com.destinylibrary.service.AuthorService;
+import com.destinylibrary.service.BookService;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.mybooks.model.entity.Book;
-import com.mybooks.model.dto.AuthorDTO;
-import com.mybooks.service.AuthorService;
-import com.mybooks.service.BookService;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -12,8 +13,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = {"https://mybooks.railway.internal", "https://mybooks.up.railway.app", "https://mybooksbg.netlify.app", "http://localhost:3000"})
-//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://destiny-library.netlify.app")
+
 public class MainController {
 
     private final BookService bookService;
