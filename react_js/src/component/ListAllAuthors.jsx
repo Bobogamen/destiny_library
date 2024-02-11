@@ -10,10 +10,10 @@ function ListAllAuthors() {
     useEffect(() => {
         getAllAuthors().then(response => {
             setAuthors(response.data)
+            setLoading(false)
         }).then(res => res.json)
             .catch(res => res.json)
 
-        setLoading(false)
     }, [])
 
     const { t } = useTranslation();

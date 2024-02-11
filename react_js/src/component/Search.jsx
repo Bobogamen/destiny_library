@@ -7,11 +7,9 @@ function SearchBar() {
     const navigate = useNavigate();
 
     const handleSearch = () => {
-        if (searchQuery.length === 0) {
-            searchQuery = undefined
+        if (searchQuery.length > 0) {
+            navigate(`/search/${searchQuery}`);
         }
-
-        navigate(`/search/${searchQuery}`);
     };
 
     const { t } = useTranslation()

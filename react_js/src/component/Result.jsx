@@ -10,18 +10,23 @@ function Result() {
     const [books, setBooks] = useState([]);
 
     useEffect(() => {
+        setLoading(true)
+
         searchBooks(word).then(response => {
             setBooks(response.data)
-        })
+            setLoading(false)
 
-        setLoading(false)
+        }).catch(error => {
+            console.log(error)
+            setLoading(false);
+        })
 
     }, [word]);
 
     const { t } = useTranslation();
 
     if (loading) {
-        return <Loading/>
+        return <Loading />
     }
 
     return (
@@ -56,7 +61,7 @@ function Result() {
                 </div>
                 :
                 <div className="d-flex justify-content-center my-2">
-                    <h2 className="text-center fw-bold mx-1 m-auto">{t('No results found')}</h2>
+                    <h2 className="text-center fw-bold mx-1 m-auto">{t('No results found')} {t('for')} '{word}'</h2>
                 </div>
             }
         </div >

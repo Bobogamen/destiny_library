@@ -32,16 +32,16 @@ function Book() {
     useEffect(() => {
         getAllAuthors().then((response) => {
             setAuthors(response.data);
+            setLoading(false)
         });
-
-        setLoading(false)
     }, []);
 
     useEffect(() => {
         setBookAuthor({
             value: book.author.id,
             label: book.author.name
-        })
+        });
+
     }, [book.author])
 
     useEffect(() => {
@@ -92,11 +92,11 @@ function Book() {
     }
 
     const { t } = useTranslation();
-
+    
     if (loading) {
         return <Loading/>
     }
-
+    
     return (
         <div>
             <div className="container">
