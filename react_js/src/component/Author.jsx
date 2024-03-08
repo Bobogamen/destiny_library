@@ -42,8 +42,8 @@ function Author() {
         })
     }
 
-    const changeAuthorName = () => {
-        if (editAuthorById(author.id, author.name)) {
+    const changeAuthorName = async () => {
+        if (await editAuthorById(author.id, author.name)) {
             navigate("/authors")
         }
     }
