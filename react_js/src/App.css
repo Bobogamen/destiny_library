@@ -81,8 +81,16 @@
   position: absolute;
   display: flex;
   justify-content: center;
-  left: 1%;
+  top: 4%;
+  left: 4%;
   z-index: 9999;
+  animation: slideInNotification 0.6s;
+  animation-fill-mode: forwards;
+}
+
+.notification.close {
+  animation: slideOutNotification 0.6s;
+  animation-fill-mode: forwards;
 }
 
 @keyframes spin {
@@ -90,3 +98,22 @@
   100% { transform: rotate(360deg); }
 }
 
+@keyframes slideInNotification {
+  0% {
+    left: -150%;
+  }
+
+  100% {
+    left: 4%;
+  }
+}
+
+@keyframes slideOutNotification {
+  0% {
+    left: 4%;
+  }
+
+  100% {
+    left: -150%;
+  }
+}

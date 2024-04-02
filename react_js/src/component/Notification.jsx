@@ -3,9 +3,16 @@ import { useTranslation } from "react-i18next";
 
 const Notification = ({ input }) => {
     const [showNotification, setShowNotification] = useState(false);
+    const [closeNotificaion, setCloseNotificaion] = useState(false);
     const [message, setMessage] = useState(null);
-    const [bgClass, setBgClass] = useState(null)
+    const [bgClass, setBgClass] = useState(null);
     const { t } = useTranslation();
+
+    const handleCloseNotification = () => {
+        setTimeout(() => {
+            setCloseNotificaion(true)
+        }, 5000)
+    }
 
     useEffect(() => {
         if (input !== null) {
@@ -35,10 +42,11 @@ const Notification = ({ input }) => {
             }
 
             setShowNotification(true);
-            const timer = setTimeout(() => {
-                setShowNotification(false)
-            }, 6000);
-            return () => clearTimeout(timer);
+            handleCloseNotification();
+            // const timer = setTimeout(() => {
+            //     setCloseNotificaion(false)
+            // }, 6000);
+            // return () => clearTimeout(timer);
         } else {
             setShowNotification(false);
         }
@@ -46,7 +54,7 @@ const Notification = ({ input }) => {
 
     return (
         showNotification ? (
-            <div className="notification">
+            <div className={`notification ${closeNotificaion ? 'close' : ''}`}>
                 <span className={`${bgClass} text-light border border-dark border-1 rounded px-1 mt-2`}>{message}</span>
             </div>
         ) : null

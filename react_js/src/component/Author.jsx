@@ -50,6 +50,7 @@ function Author() {
 
     const changeAuthorName = async () => {
         if (await editAuthorById(author.id, author.name)) {
+            localStorage.setItem('notificationType', 'change')
             navigate("/authors")
         }
     }
