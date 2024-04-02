@@ -38,6 +38,10 @@ const App = () => {
     }
   }, []);
 
+  useEffect(() =>
+    localStorage.removeItem('notificationType'),
+  [])
+
   return (
     <div className="App">
       <Header />
