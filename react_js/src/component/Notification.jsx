@@ -9,9 +9,11 @@ const Notification = ({ input }) => {
     const { t } = useTranslation();
 
     const handleCloseNotification = () => {
-        setTimeout(() => {
+        const timer = setTimeout(() => {
             setCloseNotificaion(true)
         }, 5000)
+
+        return () => clearTimeout(timer);
     }
 
     useEffect(() => {
@@ -43,10 +45,6 @@ const Notification = ({ input }) => {
 
             setShowNotification(true);
             handleCloseNotification();
-            // const timer = setTimeout(() => {
-            //     setCloseNotificaion(false)
-            // }, 6000);
-            // return () => clearTimeout(timer);
         } else {
             setShowNotification(false);
         }

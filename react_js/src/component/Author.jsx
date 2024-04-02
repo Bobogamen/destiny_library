@@ -24,7 +24,8 @@ function Author() {
             setAuthor(response.data)
             setLoading(false)
         });
-    }, [author, id]);
+
+    }, [id]);
 
     useEffect(() => {
         setShowButton(author.name.length >= 3)
@@ -64,15 +65,20 @@ function Author() {
         }
     }
 
-    const deleteBook = (event) => {
+    const deleteBook = async (event) => {
         if (window.confirm(t('Are you sure?'))) {
-            if (deleteBookById(event.target.id)) {
-                // alert(t('The book has been deleted!'))
+
+            if (await deleteBookById(event.target.id)) {
+
+                getAuthorById(id).then(response => {
+                    setAuthor(response.data);
+                });
+
                 setNotification(localStorage.setItem('notificationType', 'book-delete'))
-                navigate("/author/" + id)
+                navigate("/author/" + id);
             }
         }
-    }
+    };
 
     const { t } = useTranslation();
 

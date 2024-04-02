@@ -78,7 +78,7 @@
 }
 
 .notification {
-  position: absolute;
+  position: fixed;
   display: flex;
   justify-content: center;
   top: 4%;
