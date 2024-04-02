@@ -4,6 +4,7 @@ import { deleteAuthorById, deleteBookById, editAuthorById, getAuthorById } from 
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import Loading from './Loading';
+import Notification from './Notification';
 
 function Author() {
     const [loading, setLoading] = useState(true)
@@ -16,13 +17,14 @@ function Author() {
     const [isNameValid, setIsNameValid] = useState(true);
     const [showButton, setShowButton] = useState(true);
     const navigate = useNavigate()
+    const [notification, setNotification] = useState(null)
 
     useEffect(() => {
         getAuthorById(id).then(response => {
             setAuthor(response.data)
             setLoading(false)
         });
-    }, [id]);
+    }, [author, id]);
 
     useEffect(() => {
         setShowButton(author.name.length >= 3)
@@ -34,6 +36,10 @@ function Author() {
             }
         }
     }, [author.name.length])
+
+    useEffect(() => {
+        setNotification(localStorage.getItem('notificationType'))
+    }, [notification])
 
     const changeNameHandler = (event) => {
         setAuthor({
@@ -51,6 +57,7 @@ function Author() {
     const deleteAuthor = () => {
         if (window.confirm(t('Are you sure? Deleting the author will also delete all his books!'))) {
             if (deleteAuthorById(id)) {
+                setNotification(localStorage.setItem('notificationType', 'author-delete'))
                 navigate("/books")
             }
         }
@@ -59,8 +66,9 @@ function Author() {
     const deleteBook = (event) => {
         if (window.confirm(t('Are you sure?'))) {
             if (deleteBookById(event.target.id)) {
-                alert("The book has been deleted!")
-                window.location.reload()
+                // alert(t('The book has been deleted!'))
+                setNotification(localStorage.setItem('notificationType', 'book-delete'))
+                navigate("/author/" + id)
             }
         }
     }
@@ -73,6 +81,7 @@ function Author() {
 
     return (
         <div>
+            <Notification input={notification} />
             <div className="container">
                 <div className="card my-2 p-2 bg-danger-subtle">
                     <form className="mb-3">
@@ -113,9 +122,13 @@ function Author() {
                                 </tr>
                             ))
                             :
-                            <div className="my-3">
-                                <p className="text-bg-danger d-block width-fit-content px-1 rounded-1 m-auto">{t('The list is empty')}</p>
-                            </div>
+                            <tr>
+                                <td>
+                                    <div className="my-3">
+                                        <p className="text-bg-danger d-block width-fit-content px-1 rounded-1 m-auto">{t('The list is empty')}</p>
+                                    </div>
+                                </td>
+                            </tr>
                         }
                     </tbody>
                 </table>

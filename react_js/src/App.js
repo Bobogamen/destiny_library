@@ -1,5 +1,4 @@
 import './App.css';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { Routes, Route } from 'react-router';
 import ListAllBooks from "./component/ListAllBooks";
 import Header from "./component/Header";
@@ -41,20 +40,18 @@ const App = () => {
 
   return (
     <div className="App">
-      <Router>
-        <Header />
-        <Routes>
-          <Route path="/" element={<ListAllBooks />} />
-          <Route path="/books" element={<ListAllBooks />} />
-          <Route path="/add-book" element={<AddBook />} />
-          <Route path="/book/:id" element={<Book />} />
-          <Route path="/authors" element={<ListAllAuthors />} />
-          <Route path="/author/:id" element={<Author />} />
-          <Route path="/add-author" element={<AddAuthor />} />
-          <Route path="/search/:word" element={<Result />} />
-          <Route path="/search" element={<Result />} />
-        </Routes>
-      </Router>
+      <Header />
+      <Routes>
+        <Route path="/" element={<ListAllBooks />} />
+        <Route path="/books" element={<ListAllBooks />} />
+        <Route path="/add-book" element={<AddBook />} />
+        <Route path="/book/:id" element={<Book />} />
+        <Route path="/authors" element={<ListAllAuthors />} />
+        <Route path="/author/:id" element={<Author />} />
+        <Route path="/add-author" element={<AddAuthor />} />
+        <Route path="/search/:word" element={<Result />} />
+        <Route path="/search" element={<Result />} />
+      </Routes>
     </div>
   );
 }

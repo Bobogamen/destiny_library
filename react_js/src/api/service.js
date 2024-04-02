@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const host = 'https://destiny-library-server.onrender.com'
+// const host = 'https://destiny-library-server.onrender.com'
 // const host = 'https://my-books-server.onrender.com'
-// const host = 'http://localhost:8080'
+const host = 'http://localhost:8080'
 
 export function getAllBooks() {
     return axios.get(`${host}/books`)

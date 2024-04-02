@@ -59,7 +59,7 @@ function Book() {
         if (window.confirm(t('Are you sure?'))) {
             const deleted = await deleteBookById(id);
             if (deleted) {
-                alert(t('The book has been deleted!'));
+                localStorage.setItem('notificationType', 'book-delete')
                 navigate('/books');
             }
         }
@@ -87,6 +87,7 @@ function Book() {
         }
 
         if (await editBookById(bookForSend)) {
+            localStorage.setItem('notificationType', 'change')
             navigate('/books');
         }
     }

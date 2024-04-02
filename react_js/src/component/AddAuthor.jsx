@@ -25,6 +25,7 @@ function AddAuthor() {
         event.preventDefault();
 
         if (await addAuthor(name)) {
+            localStorage.setItem('notificationType', 'add');
             navigate('/authors');
         } else {
             alert(t('Error sending data'));

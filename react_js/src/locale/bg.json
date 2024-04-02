@@ -20,12 +20,15 @@
       "must be at least 3 symbols": "трябва да е поне 3 символа",
       "at least one author": "поне един автор",
       "Are you sure?": "Сигурен ли сте?",
-      "The book has been deleted!": "Книгата е изтрита!",
+      "The book has been deleted": "Книгата е изтрита",
       "The list is empty": "Списъкът е празен",
       "Results for": "Резултати за",
       "No results found": "Няма намерени резултати",
       "Bad data was sent": "Изпратени са грешни данни",
-      "Error sending data": "Грешка при изпращането на данни!",
+      "Error sending data": "Грешка при изпращането на данни",
       "Please, choose author": "Моля, изберете автор",
-      "Are you sure? Deleting the author will also delete all his books!" : "Сигурен ли си? Изтриването на автора ще изтрие и всички неговите книги!"
+      "Are you sure? Deleting the author will also delete all his books!" : "Сигурен ли си? Изтриването на автора ще изтрие и всички неговите книги!",
+      "Add successful" : "Добавянето е успешно",
+      "Change successful" : "Промяната е успешна",
+      "Author and his books deleted" : "Авторът и неговите книги са изтрити"
 }

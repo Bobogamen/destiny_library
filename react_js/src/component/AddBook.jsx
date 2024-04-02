@@ -47,6 +47,7 @@ function AddBook() {
                     if (response.data === false) {
                         alert(t('Bad data was sent'))
                     } else {
+                        localStorage.setItem('notificationType', 'add');
                         navigate('/books');
                     }
                 } else {
@@ -64,7 +65,7 @@ function AddBook() {
         setAuthorId(event.target.selectedOptions[0].id);
     };
 
-    const {t} = useTranslation();
+    const { t } = useTranslation();
 
     if (loading) {
         return <Loading />
@@ -101,7 +102,7 @@ function AddBook() {
                                 </button> : null
                             }
                             <button className="btn btn-danger" style={{ marginLeft: '0.5rem' }}>
-                            {t('Cancel')}
+                                {t('Cancel')}
                             </button>
                         </form>
                         :

@@ -24,7 +24,8 @@ const Header = () => {
                         <button className="btn btn-primary btn-sm">{t('Authors')}</button>
                     </a>
                     <SearchBar />
-                    <img src={languageImage} alt={i18n.language} className="i18-img m-auto" onClick={() => changeLanguage(i18n.language === 'bg' ? 'en' : 'bg')} />
+                    <img src={languageImage} alt={i18n.language} className="i18-img m-auto"
+                        onClick={() => changeLanguage(i18n.language === 'bg' ? 'en' : 'bg')} />
                 </div>
             </header>
         </div>

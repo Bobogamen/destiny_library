@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { getAllBooks } from '../api/service';
 import { BsSortAlphaDown, BsSortAlphaDownAlt } from "react-icons/bs";
 import { useTranslation } from 'react-i18next';
+import Notification from './Notification';
 import Loading from './Loading';
 
 function ListAllBooks() {
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true);
     const [books, setBooks] = useState([]);
     const [sortedBooks, setSortedBooks] = useState([]);
     const [sortByTitle, setSortByTitle] = useState(false);
     const [sortByAuthor, setSortByAuthor] = useState(false);
+    const [notification, setNotification] = useState(null)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -18,7 +20,7 @@ function ListAllBooks() {
                 const data = response.data;
                 setBooks(data);
                 setSortedBooks([...data]);
-                setLoading(false)
+                setLoading(false);
             } catch (error) {
                 console.error('Error fetching books:', error);
             }
@@ -27,61 +29,66 @@ function ListAllBooks() {
         fetchData();
     }, []);
 
+    useEffect(() => {
+        setNotification(localStorage.getItem('notificationType'))
+    }, [notification])
+
     const handleSortByTitle = () => {
         if (sortByTitle) {
-            setSortedBooks([...books].sort((a, b) => b.title.localeCompare(a.title)))
+            setSortedBooks([...books].sort((a, b) => b.title.localeCompare(a.title)));
         } else {
-            setSortedBooks([...books].sort((a, b) => a.title.localeCompare(b.title)))
+            setSortedBooks([...books].sort((a, b) => a.title.localeCompare(b.title)));
         }
         setSortByTitle(!sortByTitle);
     };
 
     const handleSortByAuthor = () => {
         if (sortByAuthor) {
-            setSortedBooks([...books].sort((a, b) => b.author.name.localeCompare(a.author.name)))
+            setSortedBooks([...books].sort((a, b) => b.author.name.localeCompare(a.author.name)));
         } else {
-            setSortedBooks([...books].sort((a, b) => a.author.name.localeCompare(b.author.name)))
+            setSortedBooks([...books].sort((a, b) => a.author.name.localeCompare(b.author.name)));
         }
         setSortByAuthor(!sortByAuthor);
     };
 
-    const { t } = useTranslation()
+    const { t } = useTranslation();
 
     if (loading) {
-        return <Loading />
+        return <Loading />;
     }
 
     return (
         <div>
+            <Notification input={notification}/>
             <div className="d-flex justify-content-center my-2">
-                <h2 className="text-center fw-bold mx-2 m-auto fst-italic text-bg-dark rounded-2 px-2 py-1">{t('Books')} {books.length}{t('pcs')}.</h2>
+                <h2 className="text-center fw-bold mx-2 m-auto fst-italic text-bg-secondary rounded-2 px-2 py-1">{t('Books')} {books.length}{t('pcs')}.</h2>
                 <a href="/add-book">
                     <button className="btn btn-success fw-bold">{t('Add')}</button>
                 </a>
             </div>
             <div className="container">
-                {sortedBooks.length > 0 ?
+                {sortedBooks.length > 0 ? (
                     <table className="table table-sm table-bordered text-center align-middle">
                         <thead className="h6 table-primary">
                             <tr>
                                 <th>
                                     <div className="h4 p-0 m-0">
                                         <span className="mx-1 fw-bold">{t('Title')}</span>
-                                        {sortByTitle ?
+                                        {sortByTitle ? (
                                             <BsSortAlphaDown className="border border-black rounded h3" onClick={handleSortByTitle} />
-                                            :
+                                        ) : (
                                             <BsSortAlphaDownAlt className="border border-black rounded h3" onClick={handleSortByTitle} />
-                                        }
+                                        )}
                                     </div>
                                 </th>
                                 <th>
                                     <div className="h4 p-0 m-0">
                                         <span className="mx-1 fw-bold">{t('Author')}</span>
-                                        {sortByAuthor ?
+                                        {sortByAuthor ? (
                                             <BsSortAlphaDown className="border border-black rounded h3" onClick={handleSortByAuthor} />
-                                            :
+                                        ) : (
                                             <BsSortAlphaDownAlt className="border border-black rounded h3" onClick={handleSortByAuthor} />
-                                        }
+                                        )}
                                     </div>
                                 </th>
                             </tr>
@@ -99,11 +106,11 @@ function ListAllBooks() {
                             ))}
                         </tbody>
                     </table>
-                    :
+                ) : (
                     <div>
                         <p className="text-bg-danger d-block width-fit-content px-1 rounded-1 m-auto">{t('The list is empty')}</p>
                     </div>
-                }
+                )}
             </div>
         </div>
     );
