@@ -27,7 +27,7 @@ function ListAllBooks() {
         };
 
         fetchData();
-    }, []);
+    }, [books]);
 
     useEffect(() => {
         setNotification(localStorage.getItem('notificationType'))
