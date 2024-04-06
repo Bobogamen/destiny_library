@@ -5,7 +5,6 @@ import { deleteBookById, editBookById, getAllAuthors, getBookById } from "../api
 import AuthorSelect from './AuthorSelect';
 import { useTranslation } from 'react-i18next';
 import Loading from './Loading';
-import Notification from './Notification';
 
 function Book() {
     const [loading, setLoading] = useState(true)
