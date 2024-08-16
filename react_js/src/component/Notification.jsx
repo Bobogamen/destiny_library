@@ -2,61 +2,76 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const Notification = ({ input }) => {
-    const [showNotification, setShowNotification] = useState(false);
-    const [closeNotificaion, setCloseNotificaion] = useState(false);
-    const [message, setMessage] = useState(null);
-    const [bgClass, setBgClass] = useState(null);
-    const { t } = useTranslation();
+  const [showNotification, setShowNotification] = useState(false);
+  const [message, setMessage] = useState(null);
+  const [bgClass, setBgClass] = useState(null);
+  const { t } = useTranslation();
 
-    const handleCloseNotification = () => {
-        const timer = setTimeout(() => {
-            setCloseNotificaion(true)
-        }, 5000)
+  const resetNotification = () => {
+    setShowNotification(false);
+    setMessage(null);
+    setBgClass(null);
+  };
 
-        return () => clearTimeout(timer);
-    }
-
-    useEffect(() => {
-        if (input !== null) {
-            switch (input) {
-                case 'add':
-                    setMessage(t('Add successful'));
-                    setBgClass('bg-success')
-                    break;
-                case 'change':
-                    setMessage(t('Change successful'));
-                    setBgClass('bg-success')
-                    break;
-                case 'book-delete':
-                    setMessage(t('The book has been deleted'));
-                    setBgClass('bg-danger')
-                    break;
-                case 'author-delete':
-                    setMessage(t('Author and his books deleted'));
-                    setBgClass('bg-danger')
-                    break;
-                case 'error':
-                    setMessage(t('Error sending data'));
-                    setBgClass('bg-danger')
-                    break;
-                default:
-                    setMessage(null);
-            }
-
-            setShowNotification(true);
-            handleCloseNotification();
-        } else {
-            setShowNotification(false);
+  useEffect(() => {
+    if (input !== null) {
+      resetNotification();
+      const timer = setTimeout(() => {
+        switch (input) {
+          case "add":
+            setMessage(t("Add successful"));
+            setBgClass("bg-success");
+            break;
+          case "change":
+            setMessage(t("Change successful"));
+            setBgClass("bg-success");
+            break;
+          case "book-delete":
+            setMessage(t("The book has been deleted"));
+            setBgClass("bg-danger");
+            break;
+          case "author-delete":
+            setMessage(t("Author and his books deleted"));
+            setBgClass("bg-danger");
+            break;
+          case "error":
+            setMessage(t("Error sending data"));
+            setBgClass("bg-danger");
+            break;
+          case "min-symbols":
+            setMessage(t("Min 3 symbols"));
+            setBgClass("bg-danger");
+            break;
+          default:
+            setMessage(null);
         }
-    }, [input, t]);
+        setShowNotification(true);
+      }, 50);
 
-    return (
-        showNotification ? (
-            <div className={`notification ${closeNotificaion ? 'close' : ''}`}>
-                <span className={`${bgClass} text-light border border-dark border-1 rounded px-1 mt-2`}>{message}</span>
-            </div>
-        ) : null
-    );
-}
+      return () => clearTimeout(timer);
+    }
+  }, [input, t]);
+
+  useEffect(() => {
+    if (showNotification) {
+      const timer = setTimeout(() => {
+        setShowNotification(false);
+        localStorage.removeItem("notificationType");
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [showNotification]);
+
+  return showNotification ? (
+    <div className="notification">
+      <span
+        className={`${bgClass} text-light border border-dark border-1 rounded px-1 mt-2`}
+      >
+        {message}
+      </span>
+    </div>
+  ) : null;
+};
 
 export default Notification;

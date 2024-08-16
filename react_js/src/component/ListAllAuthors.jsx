@@ -53,7 +53,7 @@ function ListAllAuthors() {
                                         <td>
                                             <a href={`/author/${a.id}`}>{a.name}</a>
                                         </td>
-                                        <td>{a.books.length}</td>
+                                        <td>{a.books}</td>
                                     </tr>
                                 )
                             }

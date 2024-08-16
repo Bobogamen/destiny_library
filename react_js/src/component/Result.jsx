@@ -5,66 +5,94 @@ import { useTranslation } from 'react-i18next';
 import Loading from './Loading';
 
 function Result() {
-    const [loading, setLoading] = useState(true)
-    const { word } = useParams()
+    const [loading, setLoading] = useState(true);
+    const { word } = useParams();
     const [books, setBooks] = useState([]);
+    const [authors, setAuthors] = useState([]);
+    const { t } = useTranslation();
 
     useEffect(() => {
-        setLoading(true)
+        setLoading(true);
 
         searchBooks(word).then(response => {
-            setBooks(response.data)
-            setLoading(false)
+            // Assuming your API returns authors and books as separate fields
+            setBooks(response.data.books);
+            setAuthors(response.data.authors);
+            setLoading(false);
 
         }).catch(error => {
-            console.log(error)
+            console.log(error);
             setLoading(false);
-        })
+        });
 
     }, [word]);
 
-    const { t } = useTranslation();
-
     if (loading) {
-        return <Loading />
+        return <Loading />;
     }
 
     return (
         <div>
-            {books.length > 0 ?
-                <div>
-                    <div className="d-flex justify-content-center my-2">
-                        <h2 className="text-center fw-bold mx-1 m-auto">{t('Results for')} '{word}'</h2>
-                    </div>
-                    < div className="container">
-                        <table className="table table-sm table-bordered text-center align-middle">
-                            <thead className="h6 table-primary">
-                                <tr>
-                                    <th>{t('Title')}</th>
-                                    <th>{t('Author')}</th>
+            <div className="d-flex justify-content-center my-2">
+                <h2 className="text-center fw-bold mx-1 m-auto">{t('Results for')} '{word}'</h2>
+            </div>
+            {authors.length > 0 ? (
+                <div className="container my-4">
+                    <h3 className="text-center">{t('Authors')}</h3>
+                    <table className="table table-sm table-bordered text-center align-middle">
+                        <thead className="h6 table-primary">
+                            <tr>
+                                <th>{t('Authors')}</th>
+                                <th>{t('Books')}</th>
+                            </tr>
+                        </thead>
+                        <tbody className="h6 table-warning">
+                            {authors.map(author => (
+                                <tr key={author.id}>
+                                    <td>
+                                        <a href={`/author/${author.id}`} className='text-decoration-none'>{author.name}</a>
+                                    </td>
+                                    <td>{author.books}</td>
                                 </tr>
-                            </thead>
-                            <tbody className="h6 table-warning">
-                                {books.map(b =>
-                                    <tr key={b.id}>
-                                        <td>
-                                            <a href={`/book/${b.id}`}>{b.title}</a>
-                                        </td>
-                                        <td>
-                                            <a href={`/author/${b.author.id}`}>{b.author.name}</a>
-                                        </td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </table>
-                    </div>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
-                :
+            ) : (
                 <div className="d-flex justify-content-center my-2">
-                    <h2 className="text-center fw-bold mx-1 m-auto">{t('No results found')} {t('for')} '{word}'</h2>
+                    <h4 className="text-center fw-bold mx-1 m-auto">{t('No authors found')}</h4>
                 </div>
-            }
-        </div >
+            )}
+            {books.length > 0 ? (
+                <div className="container my-4">
+                    <h3 className="text-center">{t('Books')}</h3>
+                    <table className="table table-sm table-bordered text-center align-middle">
+                        <thead className="h6 table-primary">
+                            <tr>
+                                <th>{t('Title')}</th>
+                                <th>{t('Author')}</th>
+                            </tr>
+                        </thead>
+                        <tbody className="h6 table-warning">
+                            {books.map(book => (
+                                <tr key={book.id}>
+                                    <td>
+                                        <a href={`/book/${book.id}`} className='text-decoration-none'>{book.title}</a>
+                                    </td>
+                                    <td>
+                                        <a href={`/author/${book.author.id}`} className='text-decoration-none'>{book.author.name}</a>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            ) : (
+                <div className="d-flex justify-content-center my-2">
+                    <h4 className="text-center fw-bold mx-1 m-auto">{t('No books found')}</h4>
+                </div>
+            )}
+        </div>
     );
 }
 

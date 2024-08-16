@@ -24,11 +24,14 @@
       "The list is empty": "Списъкът е празен",
       "Results for": "Резултати за",
       "No results found": "Няма намерени резултати",
+      "No authors found": "Няма намерени автори",
+      "No books found": "Няма намерени книги",
       "Bad data was sent": "Изпратени са грешни данни",
       "Error sending data": "Грешка при изпращането на данни",
       "Please, choose author": "Моля, изберете автор",
       "Are you sure? Deleting the author will also delete all his books!" : "Сигурен ли си? Изтриването на автора ще изтрие и всички неговите книги!",
       "Add successful" : "Добавянето е успешно",
       "Change successful" : "Промяната е успешна",
-      "Author and his books deleted" : "Авторът и неговите книги са изтрити"
+      "Author and his books deleted" : "Авторът и неговите книги са изтрити",
+      "Min 3 symbols": "Минимум 3 символа"
 }

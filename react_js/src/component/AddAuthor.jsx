@@ -13,7 +13,7 @@ function AddAuthor() {
         setShowButton(name.length > 2)
 
         if (name.length > 0) {
-            setIsNameValid(false)
+            setIsNameValid(true)
             if (name.length >= 3) {
                 setIsNameValid(true)
             }
@@ -24,7 +24,11 @@ function AddAuthor() {
     const addOrUpdateAuthor = async (event) => {
         event.preventDefault();
 
-        if (await addAuthor(name)) {
+        const resulsts = await addAuthor(name);
+
+        console.log(resulsts);
+
+        if (resulsts) {
             localStorage.setItem('notificationType', 'add');
             navigate('/authors');
         } else {
