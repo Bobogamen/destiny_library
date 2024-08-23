@@ -16,8 +16,13 @@ const Notification = ({ input }) => {
   useEffect(() => {
     if (input !== null) {
       resetNotification();
+
       const timer = setTimeout(() => {
-        switch (input) {
+        let inputType = input.split('_')[0];
+
+        console.log(inputType);
+
+        switch (inputType) {
           case "add":
             setMessage(t("Add successful"));
             setBgClass("bg-success");
@@ -42,6 +47,10 @@ const Notification = ({ input }) => {
             setMessage(t("Min 3 symbols"));
             setBgClass("bg-danger");
             break;
+          case "author-exist":
+            setMessage(t("Author already exists"));
+            setBgClass("bg-danger");
+            break;
           default:
             setMessage(null);
         }
@@ -63,7 +72,7 @@ const Notification = ({ input }) => {
     }
   }, [showNotification]);
 
-  return showNotification ? (
+  return showNotification && message ? (
     <div className="notification">
       <span
         className={`${bgClass} text-light border border-dark border-1 rounded px-1 mt-2`}

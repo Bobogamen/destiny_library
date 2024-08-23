@@ -6,7 +6,6 @@ const host = 'https://destiny-library-server.onrender.com'
 
 export function getAllBooks() {
     return axios.get(`${host}/books`)
-
 }
 
 export function getBookById(bookId) {
@@ -21,7 +20,7 @@ export async function editBookById(book) {
     options.method = 'POST';
     options.body = JSON.stringify(book);
 
-    return  await fetch(`${host}/edit-book`, options).then(response => response.ok)
+    return await fetch(`${host}/edit-book`, options).then(response => response.ok)
 }
 
 export function deleteBookById(bookId) {
@@ -37,11 +36,26 @@ export function getAuthorById(authorId) {
 }
 
 export async function addAuthor(name) {
-    options.method = 'POST';
-    options.body = name;
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'text/plain',
+        },
+        body: name,
+    };
 
-    return  await fetch(`${host}/add-author`, options).then(response => response.ok)
+    console.log(options.body);
+
+
+    const response = await fetch(`${host}/add-author`, options);
+
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+
+    return await response.json();
 }
+
 
 export function editAuthorById(id, name) {
     return axios.post(`${host}/edit-author?id=${id}&name=${name}`)
