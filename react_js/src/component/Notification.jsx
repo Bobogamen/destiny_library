@@ -74,9 +74,7 @@ const Notification = ({ input }) => {
 
   return showNotification && message ? (
     <div className="notification">
-      <span
-        className={`${bgClass} text-light border border-dark border-1 rounded px-1 mt-2`}
-      >
+      <span className={`${bgClass} text-light border border-dark border-1 rounded px-1 mt-2`}>
         {message}
       </span>
     </div>
