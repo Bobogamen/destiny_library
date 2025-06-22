@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
-import { deleteBookById, editBookById, getAllAuthors, getBookById } from "../api/service";
-import AuthorSelect from './AuthorSelect';
+import { deleteBookById, editBookById, getBookById } from "../api/service";
 import { useTranslation } from 'react-i18next';
 import Loading from './Loading';
 
 function Book() {
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true);
     const { id } = useParams();
     const [book, setBook] = useState({
         id: '',
@@ -17,53 +16,32 @@ function Book() {
             name: ''
         }
     });
-    const [authors, setAuthors] = useState([]);
-    const [bookAuthor, setBookAuthor] = useState({});
     const [isNameValid, setIsNameValid] = useState(true);
     const [showButton, setShowButton] = useState(true);
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     useEffect(() => {
         getBookById(id).then((response) => {
             setBook(response.data);
+            setLoading(false);
         });
     }, [id]);
 
     useEffect(() => {
-        getAllAuthors().then((response) => {
-            setAuthors(response.data);
-            setLoading(false)
-        });
-    }, []);
-
-    useEffect(() => {
-        setBookAuthor({
-            value: book.author.id,
-            label: book.author.name
-        });
-
-    }, [book.author])
-
-    useEffect(() => {
-        setShowButton(book.title.length >= 3)
-
-        if (book.title.length > 0) {
-            setIsNameValid(false)
-            if (book.title.length >= 3) {
-                setIsNameValid(true)
-            }
-        }
-    }, [book.title.length])
+        setShowButton(book.title.length >= 3);
+        setIsNameValid(book.title.length >= 3 || book.title.length === 0);
+    }, [book.title]);
 
     const deleteBook = async () => {
         if (window.confirm(t('Are you sure?'))) {
             const deleted = await deleteBookById(id);
             if (deleted) {
-                localStorage.setItem('notificationType', 'book-delete')
+                localStorage.setItem('notificationType', 'book-delete');
                 navigate('/books');
             }
         }
-    }
+    };
 
     const changeTitleHandler = (event) => {
         setBook({
@@ -72,32 +50,23 @@ function Book() {
         });
     };
 
-    const changeAuthorHandler = (selectedOption) => {
-        setBookAuthor(selectedOption)
-    };
-
     const editBook = async () => {
         const bookForSend = {
             id: book.id,
             title: book.title,
-            author: {
-                id: bookAuthor.value,
-                name: bookAuthor.label
-            }
-        }
+            author: book.author // keep current author unchanged
+        };
 
         if (await editBookById(bookForSend)) {
-            localStorage.setItem('notificationType', 'change')
+            localStorage.setItem('notificationType', 'change');
             navigate('/books');
         }
+    };
+
+    if (loading) {
+        return <Loading />;
     }
 
-    const { t } = useTranslation();
-    
-    if (loading) {
-        return <Loading/>
-    }
-    
     return (
         <div>
             <div className="container">
@@ -106,7 +75,7 @@ function Book() {
                         <small className={`bg-danger px-1 rounded text-white ${isNameValid ? 'hidden' : ''}`}>
                             {t('Tittle')} {t('must be at least 3 symbols')}
                         </small>
-                        <h2 className="fw-bold p-0 m-0">{t('Title')}: </h2>
+                        <h2 className="fw-bold p-0 m-0">{t('Title')}:</h2>
                         <div className="d-grid">
                             <input
                                 className="h4 d-inline-block text-center px-2"
@@ -116,22 +85,16 @@ function Book() {
                             />
                         </div>
                         <div className="d-grid width-fit-content m-auto mt-2">
-                            <h3 className="fw-bold p-0 m-0">{t('Author')}: </h3>
-                            <AuthorSelect
-                                authors={authors}
-                                selectedAuthor={bookAuthor}
-                                onAuthorChange={changeAuthorHandler}
-                            />
+                            <h3 className="fw-bold p-0 m-0">{t('Author')}:</h3>
+                            <span className="fw-bold fst-italic fs-5 border border-black border-2 rounded px-2 py-1 mt-2">
+                                {book.author.name}
+                            </span>
                         </div>
-                        {showButton ?
+                        {showButton && (
                             <span id={id} className="btn btn-success my-5" onClick={editBook}>
                                 {t('Save')}
                             </span>
-                            :
-                            <span id={id} className="btn btn-success my-5 hidden" onClick={editBook}>
-                                {t('Save')}
-                            </span>
-                        }
+                        )}
                     </form>
                 </div>
                 <span id={id} className="btn btn-danger mt-5" onClick={deleteBook}>
@@ -141,6 +104,5 @@ function Book() {
         </div>
     );
 }
-
 
 export default Book;
